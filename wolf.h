@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 12:56:33 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/02 22:06:55 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/03 10:04:11 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <math.h>
 # include <stdlib.h>
 # include "minilibx_macos/mlx.h"
+# include "libft.h"
 
 
 # define RED 0xFF0033
@@ -36,6 +37,8 @@ typedef struct			s_point
 
 typedef struct			s_game
 {
+
+	char **map;
 	void *mlx_ptr;
 	void *win_ptr;
 
@@ -64,13 +67,14 @@ typedef struct			s_dda
 	int			side;
 }						t_dda;
 
-t_point		*new_point();
-t_game		*new_wolf();
+char		**reader(int fd);
+t_point		*new_point(double x, double y);
+t_game		*new_wolf(char **map, int width, int height);
 void		check_vertical_inter(t_game *game, double cam, t_dda *dda);
 void		check_horizontal_inter(t_game *game, double cam, t_dda *dda);
 t_dda		*new_dda();
-void		castor(t_dda *dda, int map[24][24]);
-int 		color(t_dda *dda, int map[24][24]);
-void		drawer(t_game *game, t_dda *dda, int map[24][24], int column);
+void		caster(t_dda *dda, char **map);
+int 		color(t_dda *dda, char **map);
+void		drawer(t_game *game, t_dda *dda, char **map, int column);
 
 #endif

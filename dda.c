@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 21:44:09 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/02 22:12:10 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/03 10:04:08 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void			check_vertical_inter(t_game *game, double cam, t_dda *dda)
 
 }
 
-void			castor(t_dda *dda, int map[24][24])
+void			caster(t_dda *dda, char **map)
 {
 	int hit;
 
@@ -72,7 +72,7 @@ void			castor(t_dda *dda, int map[24][24])
 	}
 }
 
-void			drawer(t_game *game, t_dda *dda, int map[24][24], int column)
+void			drawer(t_game *game, t_dda *dda, char **map, int column)
 {
 	int finalDist;
 	int projectedHeight;

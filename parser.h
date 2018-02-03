@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 22:14:19 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/02 22:15:39 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/03 09:57:55 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,3 +16,6 @@
 # include "wolf.h"
 # include <unistd.h>
 # include <fcntl.h>
+# include "libft.h"
+
+#endif

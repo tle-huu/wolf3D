@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 12:59:43 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/02 22:06:59 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/03 09:49:17 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,13 @@ t_point		*new_point(double x, double y)
 
 }
 
-t_game		*new_wolf(int width, int height)
+t_game		*new_wolf(char **map, int width, int height)
 {
 	t_game *nouveau;
 
 	if (!(nouveau = (t_game *)malloc(sizeof(*nouveau))))
 		exit(1);
+	nouveau->map = map;
 	nouveau->mlx_ptr = NULL;
 	nouveau->win_ptr = NULL;
 	nouveau->fov = PI / 3;
@@ -64,7 +65,7 @@ t_dda		*new_dda()
 	return (nouveau);
 }
 
-int 	color(t_dda *dda, int map[24][24])
+int 	color(t_dda *dda, char **map)
 {
 	int color;
 	int square;

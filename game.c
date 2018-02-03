@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 17:13:08 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/02 22:13:54 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/03 10:25:22 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,8 @@
 #include <stdio.h>
 #include <math.h>
 #include "wolf.h"
+#include "libft.h"
+#include "fcntl.h"
 
 #define PI 3.14159265358979323846
 
@@ -37,7 +39,7 @@ int worldMap[mapWidth][mapHeight]=
 	{1,0,0,0,0,0,2,2,0,2,2,0,0,0,0,3,0,3,0,3,0,0,0,1},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
-	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
+	{1,0,0,0,0,0,0,0,0,0,0,4,4,4,0,0,0,0,0,0,0,0,0,1},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
 	{1,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,1},
@@ -52,12 +54,12 @@ int worldMap[mapWidth][mapHeight]=
 	{1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
 };
 
-int main(void)
+int		game(char **map)
 {
 	t_game *game;
 	t_dda *dda;
 
-	game = new_wolf(SCREENWIDTH, SCREENHEIGHT);  // game = parser
+	game = new_wolf(map, SCREENWIDTH, SCREENHEIGHT);  // game = parser
 	dda = new_dda();
 	game->h = 64;
 	game->playerHeight = game->h / 2;
@@ -83,11 +85,32 @@ int main(void)
 
 		check_horizontal_inter(game, cam, dda);
 		check_vertical_inter(game, cam, dda);
-		castor(dda, worldMap);
-		drawer(game, dda, worldMap, column);
+		caster(dda, game->map);
+		drawer(game, dda, game->map, column);
 		column++;
 	}
 
 	mlx_loop(game->mlx_ptr);
 	return 0;
+}
+
+int main(int argc, char **argv)
+{
+	int fd;
+	char **map;
+
+	if (argc != 2)
+	{
+		ft_printf("usage: ./wolf map_file\n");
+		return (1);
+	}
+	if ((fd = open(argv[1], O_RDONLY)) < 0)
+	{
+		ft_printf("Wrong entry.\n");
+		return (1);
+	}
+	game(reader(fd));
+	if (close(fd) == -1)
+		return (2);
+	return (0);
 }
