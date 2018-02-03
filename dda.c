@@ -6,13 +6,13 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 21:44:09 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/03 10:04:08 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/03 12:16:02 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "wolf.h"
 
-void		check_horizontal_inter(t_game *game, double cam, t_dda *dda)
+void		check_vertical_inter(t_game *game, double cam, t_dda *dda)
 {
 	dda->ray->x = game->direction->x + (game->plane->x) * cam;
 
@@ -29,7 +29,7 @@ void		check_horizontal_inter(t_game *game, double cam, t_dda *dda)
 	}
 }
 
-void			check_vertical_inter(t_game *game, double cam, t_dda *dda)
+void			check_horizontal_inter(t_game *game, double cam, t_dda *dda)
 {
 	dda->ray->y = game->direction->y + game->plane->y * cam;
 
@@ -74,15 +74,15 @@ void			caster(t_dda *dda, char **map)
 
 void			drawer(t_game *game, t_dda *dda, char **map, int column)
 {
-	int finalDist;
+	double finalDist;
 	int projectedHeight;
 	int drawStart;
 	int drawEnd;
 
 	if (!dda->side)
-		finalDist = (dda->map->x - game->position->x + (1 - dda->step->x) / 2) / dda->ray->x;
+		finalDist = fabs((dda->map->x - game->position->x + (1 - dda->step->x) / 2) / dda->ray->x);
 	else
-		finalDist = (dda->map->y - game->position->y + (1 - dda->step->y) / 2) / dda->ray->y;
+		finalDist = fabs((dda->map->y - game->position->y + (1 - dda->step->y) / 2)  / dda->ray->y);
 	projectedHeight = (int)(game->screen->y / finalDist);
 	drawStart = game->screen->y / 2 - projectedHeight / 2;
 	drawEnd = game->screen->y / 2 + projectedHeight / 2;

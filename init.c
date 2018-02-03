@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 12:59:43 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/03 09:49:17 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/03 13:46:16 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,16 +35,16 @@ t_game		*new_wolf(char **map, int width, int height)
 	nouveau->mlx_ptr = NULL;
 	nouveau->win_ptr = NULL;
 	nouveau->fov = PI / 3;
-	nouveau->position = new_point(0, 0);
-	nouveau->plane = new_point(0, 0.66);
 	nouveau->direction = new_point(-1, 0);
 	nouveau->screen = new_point(width, height);
+	nouveau->position = new_point(0, 0);
+	nouveau->plane = new_point(0, tan(nouveau->fov / 2));
+
 
 	nouveau->time = 0;
 	nouveau->oldTime = 0;
-	nouveau->h = 0;
-	nouveau->playerHeight = 0;
-	nouveau->moveSpedd = 0;
+	nouveau->h = 64;
+	nouveau->moveSpeed = 0;
 	nouveau->rotSpeed = 0;
 	nouveau->frameTime = 0;
 	return (nouveau);
