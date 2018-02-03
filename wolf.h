@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 12:56:33 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/03 13:40:53 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/03 15:55:56 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,23 +84,23 @@ typedef struct			s_point
 typedef struct			s_game
 {
 
-	char **map;
-	void *mlx_ptr;
-	void *win_ptr;
+	char		**map;
+	void		*mlx_ptr;
+	void		*win_ptr;
 
-	t_point *position;
-	t_point *direction;
-	t_point *plane;
-	t_point *screen;
+	t_point		*position;
+	t_point		*direction;
+	t_point		*plane;
+	t_point		*screen;
 
-	double fov;
-	double time;
-	double oldTime;
-	double playerHeight;
-	double h;
-	double moveSpeed;
-	double rotSpeed;
-	double frameTime;
+	double		fov;
+	double		time;
+	double		oldTime;
+	double		playerHeight;
+	double		h;
+	double		moveSpeed;
+	double		rotSpeed;
+	double		frameTime;
 }						t_game;
 
 typedef struct			s_dda
@@ -120,7 +120,7 @@ void		check_vertical_inter(t_game *game, double cam, t_dda *dda);
 void		check_horizontal_inter(t_game *game, double cam, t_dda *dda);
 t_dda		*new_dda();
 void		caster(t_dda *dda, char **map);
-int 		color(t_dda *dda, char **map);
+int			color(t_dda *dda, char **map);
 void		drawer(t_game *game, t_dda *dda, char **map, int column);
 
 #endif

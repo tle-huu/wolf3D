@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 17:13:08 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/03 15:13:55 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/03 15:32:24 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@
 
 #define mapWidth 24
 #define mapHeight 24
-#define SCREENWIDTH 1000
-#define SCREENHEIGHT 500
+#define SCREENWIDTH 320
+#define SCREENHEIGHT 200
 
 #include <time.h>
 #include <sys/time.h>
@@ -55,16 +55,20 @@ int		motion(int keyCode, t_game *game)
 {
 	if (keyCode == KEY_UP)
 	{
-		if(!game->map[(int)(game->position->x + game->direction->x * game->moveSpeed)][(int)(game->position->y)])
+		if(!game->map[(int)(game->position->x + game->direction->x *
+			 game->moveSpeed)][(int)(game->position->y)])
 			game->position->x += game->direction->x * game->moveSpeed;
-		if(!game->map[(int)(game->position->x)][(int)(game->position->y + game->direction->y * game->moveSpeed)])
+		if(!game->map[(int)(game->position->x)][(int)(game->position->y
+			 + game->direction->y * game->moveSpeed)])
 			game->position->y += game->direction->y * game->moveSpeed;
 	}
 	else if (keyCode == KEY_DOWN)
 	{
-		if(!game->map[(int)(game->position->x - game->direction->x * game->moveSpeed)][(int)(game->position->y)])
+		if(!game->map[(int)(game->position->x - game->direction->x *
+			 game->moveSpeed)][(int)(game->position->y)])
 			game->position->x -= game->direction->x * game->moveSpeed;
-		if(!game->map[(int)(game->position->x)][(int)(game->position->y - game->direction->y * game->moveSpeed)])
+		if(!game->map[(int)(game->position->x)][(int)(game->position->y
+			 - game->direction->y * game->moveSpeed)])
 			game->position->y -= game->direction->y * game->moveSpeed;
 	}
 	else if (keyCode == KEY_RIGHT)
@@ -120,7 +124,7 @@ void		painter(t_game *game, t_dda *dda)
 	while (column < SCREENWIDTH)
 	{
 
-		cam = 2 * column / (double)SCREENWIDTH - 1; //x-coordinate in camera space
+		cam = 2 * column / (double)SCREENWIDTH - 1;
 
 		dda->map->x = game->position->x;
 		dda->map->y = game->position->y;
@@ -133,45 +137,32 @@ void		painter(t_game *game, t_dda *dda)
 	}
 }
 
-
 int		game(char **map)
 {
 	t_game *game;
 	t_dda *dda;
 
-	struct timespec timee;
-	current_utc_time(&timee);
-	struct timespec oldTime;
-
-	game = new_wolf(map, SCREENWIDTH, SCREENHEIGHT);  // game = parser
+	//struct timespec timee;
+	//current_utc_time(&timee);
+	//struct timespec oldTime;
+	game = new_wolf(map, SCREENWIDTH, SCREENHEIGHT);
 	dda = new_dda();
-	//double distPlanePlayer = (SCREENWIDTH / 2) / (tan(PI / 6));
-	int color = 0;
-
 	game->mlx_ptr = mlx_init();
 	game->win_ptr = mlx_new_window(game->mlx_ptr, SCREENWIDTH, SCREENHEIGHT, "Raycatster");
 	game->position->x = 14.5;
 	game->position->y = 14.5;
-
-	ft_printf("je passe icic \n");
-
-	painter(game, dda);
-	current_utc_time(&timee);
-	oldTime = timee;
-	current_utc_time(&timee);
-
-	game->frameTime = (timee.tv_nsec - oldTime.tv_nsec) / 100000.0;
-	printf("%f\n", 1.0 / game->frameTime);
-	printf("frame : %f\n", game->frameTime);
-
-	game->moveSpeed = 0.1;
-	game->rotSpeed = 0.1;
-	mlx_do_key_autorepeatoff((void *)game);
-
-	mlx_key_hook(game->win_ptr, motion, (void *)game);
+	//painter(game, dda);
+	//current_utc_time(&timee);
+	//oldTime = timee;
+	//current_utc_time(&timee);
+	//game->frameTime = (timee.tv_nsec - oldTime.tv_nsec) / 100000.0;
+	game->moveSpeed = 0.2;
+	game->rotSpeed = 0.07;
+	mlx_do_key_autorepeaton(game->mlx_ptr);
+	mlx_hook(game->win_ptr, 2, 0, motion, (void *)game);
+//	mlx_key_hook(game->win_ptr, motion, (void *)game);
 	//mlx_hook(v->window, 2, 0, motion, (void *)game);
 	mlx_loop(game->mlx_ptr);
-
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 12:59:43 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/03 13:46:16 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/03 15:53:27 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,6 @@ t_point		*new_point(double x, double y)
 	nouveau->x = x;
 	nouveau->y = y;
 	return (nouveau);
-
 }
 
 t_game		*new_wolf(char **map, int width, int height)
@@ -39,18 +38,16 @@ t_game		*new_wolf(char **map, int width, int height)
 	nouveau->screen = new_point(width, height);
 	nouveau->position = new_point(0, 0);
 	nouveau->plane = new_point(0, tan(nouveau->fov / 2));
-
-
 	nouveau->time = 0;
 	nouveau->oldTime = 0;
 	nouveau->h = 64;
-	nouveau->moveSpeed = 0;
-	nouveau->rotSpeed = 0;
+	nouveau->moveSpeed = 0.15;
+	nouveau->rotSpeed = 0.07;
 	nouveau->frameTime = 0;
 	return (nouveau);
 }
 
-t_dda		*new_dda()
+t_dda		*new_dda(void)
 {
 	t_dda	*nouveau;
 
@@ -65,7 +62,7 @@ t_dda		*new_dda()
 	return (nouveau);
 }
 
-int 	color(t_dda *dda, char **map)
+int			color(t_dda *dda, char **map)
 {
 	int color;
 	int square;
