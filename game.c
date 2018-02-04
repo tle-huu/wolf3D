@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/01/31 17:13:08 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/04 14:57:34 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/04 15:02:55 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,6 +49,9 @@ int			game(char **map)
 	mlx_do_key_autorepeaton(game->mlx_ptr);
 	mlx_hook(game->win_ptr, 2, 0, motion, (void *)game);
 	mlx_loop(game->mlx_ptr);
+	free(map);
+	free(game);
+	free(dda);
 	return (0);
 }
 
