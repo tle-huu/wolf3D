@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 12:56:33 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/03 15:55:56 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/04 14:55:54 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,9 @@
 # include <stdlib.h>
 # include "minilibx_macos/mlx.h"
 # include "libft.h"
+# include "fcntl.h"
 
+# define PI 3.14159265358979323846
 # define KEY_A 0
 # define KEY_S 1
 # define KEY_D 2
@@ -66,13 +68,13 @@
 # define KEY_RIGHT 124
 # define KEY_DOWN 125
 # define KEY_UP 126
-
+# define SCREENWIDTH 320
+# define SCREENHEIGHT 200
 # define RED 0xFF0033
 # define YELLOW 0xFFFF00
 # define GREEN 0x00FF00
 # define BLUE 0x0000FF
 # define WHITE 0xFFFFFF
-
 # define PI 3.14159265358979323846
 
 typedef struct			s_point
@@ -121,6 +123,8 @@ void		check_horizontal_inter(t_game *game, double cam, t_dda *dda);
 t_dda		*new_dda();
 void		caster(t_dda *dda, char **map);
 int			color(t_dda *dda, char **map);
-void		drawer(t_game *game, t_dda *dda, char **map, int column);
+void		drawer(t_game *game, t_dda *dda, int column);
+int			motion(int keyCode, t_game *game);
+void		painter(t_game *game, t_dda *dda);
 
 #endif

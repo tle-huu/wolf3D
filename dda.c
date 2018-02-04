@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 21:44:09 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/03 15:52:19 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/04 14:57:05 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,15 +68,33 @@ void			caster(t_dda *dda, char **map)
 	}
 }
 
-void			drawer(t_game *game, t_dda *dda, char **map, int column)
+static void		norm(int drawstart, int drawend, int column,
+	 t_game *game, t_dda *dda)
+{
+	int i;
+
+	i = 0;
+	while (i <= drawstart)
+		mlx_pixel_put(game->mlx_ptr, game->win_ptr, column, i++,
+			0x202033);
+	while (drawstart <= drawend)
+		mlx_pixel_put(game->mlx_ptr, game->win_ptr, column, drawstart++,
+			color(dda, game->map));
+	while (drawstart <= game->screen->y)
+		mlx_pixel_put(game->mlx_ptr, game->win_ptr, column, drawstart++,
+			0x996600);
+}
+
+void			drawer(t_game *game, t_dda *dda, int column)
 {
 	double	finaldist;
 	int		projectedheight;
 	int		drawstart;
 	int		drawend;
+	int		i;
 
 	if (!dda->side)
-		finalDist = fabs((dda->map->x - game->position->x +
+		finaldist = fabs((dda->map->x - game->position->x +
 			(1 - dda->step->x) / 2) / dda->ray->x);
 	else
 		finaldist = fabs((dda->map->y - game->position->y +
@@ -88,7 +106,5 @@ void			drawer(t_game *game, t_dda *dda, char **map, int column)
 		drawstart = 0;
 	if (drawend >= game->screen->y)
 		drawend = game->screen->y - 1;
-	while (drawstart <= drawend)
-		mlx_pixel_put(game->mlx_ptr, game->win_ptr, column, drawstart++,
-			color(dda, map));
+	norm(drawstart, drawend, column, game, dda);
 }
