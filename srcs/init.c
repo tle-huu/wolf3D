@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 12:59:43 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/04 15:48:26 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/11 11:02:09 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,10 +59,10 @@ t_dda		*new_dda(void)
 	return (nouveau);
 }
 
-int			color(t_dda *dda, char **map)
+int			color(t_dda *dda, char **map, t_game *game)
 {
-	int color;
-	int square;
+	int			color;
+	int			square;
 
 	square = map[(int)dda->map->x][(int)dda->map->y];
 	if (square == 1)
@@ -75,7 +75,13 @@ int			color(t_dda *dda, char **map)
 		color = YELLOW;
 	else
 		color = WHITE;
-	if (dda->side)
+	if (dda->side && ((game->direction->x < 0 && dda->step->y < 0)
+	|| (game->direction->x > 0 && dda->step->y < 0)))
+		color /= 2;
+	else if (dda->side)
 		color /= 3;
+	else if (((game->direction->y < 0 && dda->step->x < 0)
+	|| (game->direction->y > 0 && dda->step->x < 0)))
+		color /= 4;
 	return (color);
 }

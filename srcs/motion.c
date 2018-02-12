@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/04 13:37:49 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/04 15:45:18 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/04 16:16:38 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,8 @@ int			motion(int keycode, t_game *game)
 		keyright(game);
 	else if (keycode == KEY_LEFT)
 		keyleft(game);
+	else if (keycode == KEY_ESC)
+		exit(0);
 	mlx_clear_window(game->mlx_ptr, game->win_ptr);
 	painter(game, dda);
 	free(dda);

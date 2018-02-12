@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 21:44:09 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/04 15:41:02 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/11 10:52:56 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,5 +105,5 @@ void			drawer(t_game *game, t_dda *dda, int column)
 	norm(drawstart, drawend, column, game);
 	while (drawstart <= drawend)
 		mlx_pixel_put(game->mlx_ptr, game->win_ptr, column, drawstart++,
-			color(dda, game->map));
+			color(dda, game->map, game));
 }

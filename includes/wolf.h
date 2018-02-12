@@ -6,7 +6,7 @@
 /*   By: tle-huu- <tle-huu-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/02/02 12:56:33 by tle-huu-          #+#    #+#             */
-/*   Updated: 2018/02/04 15:46:19 by tle-huu-         ###   ########.fr       */
+/*   Updated: 2018/02/11 10:52:45 by tle-huu-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@
 # define KEY_N 45
 # define KEY_M 46
 # define KEY_TAB 48
+# define KEY_ESC 53
 # define KEY_PLUS 69
 # define KEY_MINUS 78
 # define KEY_LEFT 123
@@ -121,7 +122,7 @@ void					check_horizontal_inter(t_game *game, double cam,
 	t_dda *dda);
 t_dda					*new_dda();
 void					caster(t_dda *dda, char **map);
-int						color(t_dda *dda, char **map);
+int						color(t_dda *dda, char **map, t_game *game);
 void					drawer(t_game *game, t_dda *dda, int column);
 int						motion(int keycode, t_game *game);
 void					painter(t_game *game, t_dda *dda);
